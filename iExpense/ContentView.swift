@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ExpenseItem: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let type: String
     let amount: Double
+    let currency: String
 }
 
 @Observable
@@ -36,9 +37,7 @@ class Expenses {
 struct ContentView: View {
     @State private var expenses = Expenses()
     @State private var showingAddExpense = false
-    @State private var selectedCurrency: String = "USD"
     
-    let currencies = ["USD", "CA"]
     
     var body: some View {
         NavigationStack {
@@ -53,7 +52,8 @@ struct ContentView: View {
                         }
                         Spacer()
                         
-                        Text(item.amount,format: .currency(code: selectedCurrency))
+                        Text(item.amount,format: .currency(code: item.currency))
+                            .foregroundColor(item.amount < 10 ? .green : (item.amount < 100) ? .orange : .purple)
                     }
                 }
                 .onDelete(perform: removeItems)

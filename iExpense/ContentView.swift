@@ -38,7 +38,6 @@ struct ContentView: View {
     @State private var expenses = Expenses()
     @State private var showingAddExpense = false
     
-    
     var body: some View {
         NavigationStack {
             List {
@@ -48,7 +47,9 @@ struct ContentView: View {
                             Text(item.name)
                                 .font(.headline)
                             
+                            
                             Text(item.type)
+                            
                         }
                         Spacer()
                         
